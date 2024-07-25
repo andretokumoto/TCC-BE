@@ -3,3 +3,9 @@ Este projeto representa o trabalho final realizado como parte do curso de Engenh
 
 
 This project represents the final work carried out as part of the Computer Engineering course at the Federal University of São Paulo (UNIFESP). It is an innovative web application that provides a convenient solution for converting typed text in an interface similar to popular text editors into LaTeX files, as well as automatically generating a PDF formatted according to the guidelines of the Brazilian Association of Technical Standards (ABNT).
+
+
+
+para iniciar o servidor:   python manage.py runserver 8080
+
+    
