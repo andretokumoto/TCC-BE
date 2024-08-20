@@ -4,6 +4,7 @@ import datetime
 from rest_framework.response import Response
 from rest_framework import status,viewsets
 from rest_framework.decorators import api_view, throttle_classes ,permission_classes
+from .tamplates.request_to_document import to_pdf, to_tex
 
 
 @api_view(['GET','POST'])
