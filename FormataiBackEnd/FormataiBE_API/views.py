@@ -15,7 +15,7 @@ def getpdf(request):
     if request.method == 'GET':
      ...
      
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def getLatex(request):
     
     if request.method == 'POST':
@@ -23,6 +23,6 @@ def getLatex(request):
         dados = request.data
         tex_gerado = to_tex(dados)
         
-        arquivo = FileResponse(tex_gerado, content_type='application/x-tex')
+        arquivo = FileResponse(open(tex_gerado, 'rb'), content_type='application/x-tex')
         arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(tex_gerado)}"'
         return arquivo

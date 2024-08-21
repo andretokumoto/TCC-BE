@@ -22,7 +22,7 @@ def to_tex(dados):
     doc_gerado = None
     
     if document_type == 'oficio':
-        template_path = 'FormataiBE_API//tampletes/oficio.tex'  #template oficio
+        template_path = 'FormataiBE_API/tampletes/oficio.tex'  #template oficio
         template = open_template(template_path)#le os dados do template
         
         #substitui os dados do template pelo do requerimento
