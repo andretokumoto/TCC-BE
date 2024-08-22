@@ -12,6 +12,7 @@ import os
 @api_view(['GET','POST'])
 def getpdf(request):
     
+    pdf_gerado = None
     if request.method == 'POST':
         pdf_gerado = to_pdf()
 
