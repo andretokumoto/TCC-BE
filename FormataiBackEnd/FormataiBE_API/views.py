@@ -23,6 +23,12 @@ def getLatex(request):
         dados = request.data
         tex_gerado = to_tex(dados)
         
-        arquivo = FileResponse(open(tex_gerado, 'rb'), content_type='application/x-tex')
-        arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(tex_gerado)}"'
-        return arquivo
+        if os.path.exists(tex_gerado):
+
+            arquivo = FileResponse(open(tex_gerado, 'rb'), content_type='application/x-tex')
+            arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(tex_gerado)}"'
+            
+            return arquivo
+        
+        else:
+            return Response({"error": "File not found"}, status=status.HTTP_404_NOT_FOUND)

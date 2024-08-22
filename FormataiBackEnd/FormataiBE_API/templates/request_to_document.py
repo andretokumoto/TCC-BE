@@ -24,6 +24,9 @@ def salva_arquivo(output_path, doc_gerado):
     with open(output_path, 'w') as output_file:
         output_file.write(doc_gerado)  
 
+def to_pdf(dados):
+    ...
+
 def to_tex(dados):
     
 
@@ -52,4 +55,4 @@ def to_tex(dados):
 
     return output_path
 
-to_tex(dados)
+
