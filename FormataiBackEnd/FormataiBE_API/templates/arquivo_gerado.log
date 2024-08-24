@@ -112,6 +112,26 @@ LaTeX Font Info:    ... okay on input line 8.
 * \textwidth=426.79135pt
 * \textheight=674.33032pt
 * \oddsidemargin=13.08827pt
+* \ever OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=674.33032pt
+* \oddsidemargin=13.08827pt
 * \evensidemargin=13.08827pt
 * \topmargin=-23.91173pt
 * \headheight=12.0pt
@@ -131,32 +151,32 @@ LaTeX Font Info:    ... okay on input line 8.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.29 \textbf{Assunto:} _
+                        _ASSUNTO__
+? 
+! Interruption.
+<to be read again> 
+                   _
+l.29 \textbf{Assunto:} _
+                        _ASSUNTO__
+? 
+! Emergency stop.
+<to be read again> 
+                   _
+l.29 \textbf{Assunto:} _
+                        _ASSUNTO__
+End of file on the terminal!
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--46
-
- []
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(FormataiBE_API/templates/arquivo_gerado.aux) ) 
+ 
 Here is how much of TeX's memory you used:
- 1559 strings out of 483163
- 23505 string characters out of 5965511
- 267743 words of memory out of 5000000
- 16622 multiletter control sequences out of 15000+600000
+ 2109 strings out of 483163
+ 39073 string characters out of 5965511
+ 448176 words of memory out of 5000000
+ 17162 multiletter control sequences out of 15000+600000
  533284 words of font info for 27 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 30i,4n,34p,225b,131s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/andre/.texlive2019/texmf
--var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr12.pfb>
-Output written on FormataiBE_API/templates/arquivo_gerado.pdf (1 page, 28481 by
-tes).
-PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
- 14 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 35i,1n,34p,202b,131s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
