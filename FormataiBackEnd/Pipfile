@@ -4,12 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-django = "*"
-djangorestframework = "*"
+django = ">=3.2,<4.0"          # Especifique a versão do Django
+djangorestframework = ">=3.12,<4.0"  # Especifique a versão do Django REST Framework
 djangorestframework-xml = "*"
 djoser = "*"
-pdflatex = "*"
-pylatex = "*"
+# Remova pdflatex e pylatex se não forem necessários para o ambiente de produção
 gunicorn = "*"
 
 [dev-packages]

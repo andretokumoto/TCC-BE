@@ -1,19 +1,16 @@
 # Use uma imagem base com Python 3.12
 FROM python:3.12-slim
 
-# Atualize e instale pipenv
-RUN apt-get update && apt-get install -y pipenv
+# Atualize e instale as dependências do sistema necessárias
+RUN apt-get update && apt-get install -y texlive-latex-base
 
-# Instale as dependências do sistema necessárias (opcional)
-RUN apt-get install -y texlive-latex-base
-
-# Copie o Pipfile e o Pipfile.lock
-COPY Pipfile Pipfile.lock /app/
+# Copie o requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-# Instale as dependências usando o Pipenv
-RUN pipenv install --deploy --ignore-pipfile
+# Instale as dependências usando o pip
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie o restante do seu código para o contêiner
 COPY . /app/
