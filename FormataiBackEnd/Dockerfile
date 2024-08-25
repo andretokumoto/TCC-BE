@@ -1,17 +1,22 @@
-# Use uma imagem base com Python e LaTeX
-FROM python:3.11-slim
+FROM python:3.11
 
-# Instale o pdflatex
-RUN apt-get update && apt-get install -y texlive-latex-base
-
-# Configure o diretório de trabalho
+# Crie um diretório de trabalho
 WORKDIR /app
 
-# Copie os arquivos do projeto para o contêiner
+# Instale as dependências do sistema necessárias (por exemplo, LaTeX)
+RUN apt-get update && apt-get install -y texlive-latex-base
+
+# Copie o Pipfile e o Pipfile.lock para o contêiner
+COPY Pipfile Pipfile.lock ./
+
+# Instale o Pipenv
+RUN pip install pipenv
+
+# Instale as dependências usando o Pipenv
+RUN pipenv install --deploy --ignore-pipfile
+
+# Copie o restante do seu código para o contêiner
 COPY . .
 
-# Instale as dependências do Python
-RUN pip install -r requirements.txt
-
-# Comando para iniciar a aplicação
-CMD ["pipenv", "run", "gunicorn", "FormataiBackEnd.wsgi"]
+# Comando para iniciar seu aplicativo (usando o Pipenv)
+CMD ["pipenv", "run", "gunicorn", "FormataiBackEnd.wsgi:application", "--bind", "0.0.0.0:8000"]
