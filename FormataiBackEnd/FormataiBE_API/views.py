@@ -12,16 +12,18 @@ import os
 @api_view(['GET','POST'])
 def getpdf(request):
     
-    pdf_gerado = None
-    if request.method == 'POST':
-        pdf_gerado = to_pdf()
+    if request.method == 'POST' or request.method == 'GET':
+        dados = request.data
+        
+        pdf_gerado = to_pdf(dados)
 
-    if os.path.exists(pdf_gerado):
+        if os.path.exists(pdf_gerado):
 
-        arquivo = FileResponse(open(pdf_gerado, 'rb'), content_type='application/x-tex')
-        arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(pdf_gerado)}"'
+            arquivo = FileResponse(open(pdf_gerado, 'rb'), content_type='application/x-tex')
+            arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(pdf_gerado)}"'
 
-        return arquivo
+            return arquivo
+
         
     else:
             return Response({"error": "File not found"}, status=status.HTTP_404_NOT_FOUND)

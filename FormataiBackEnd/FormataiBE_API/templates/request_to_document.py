@@ -13,9 +13,9 @@ def salva_arquivo(output_path, doc_gerado):
 import subprocess
 import os
 
-def to_pdf():
+def to_pdf(dados):
     
-    tex_path = os.path.abspath('FormataiBE_API/templates')
+    tex_path = to_tex(dados)
     tex_filename = 'arquivo_gerado.tex'
     pdf_filename = 'arquivo_gerado.pdf'
 
