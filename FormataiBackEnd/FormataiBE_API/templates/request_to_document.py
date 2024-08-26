@@ -10,9 +10,6 @@ def salva_arquivo(output_path, doc_gerado):
     with open(output_path, 'w') as output_file:
         output_file.write(doc_gerado)  
 
-import subprocess
-import os
-
 def to_pdf(dados):
     
     tex_path = to_tex(dados)
