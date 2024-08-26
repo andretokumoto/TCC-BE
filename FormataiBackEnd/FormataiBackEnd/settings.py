@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w@yg*9g$dn$96gdq0*&qf6snh%zrp-%ca+2c*8u4gfh#-t7)z4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tcc-api-7edl.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['api-backend-hddt.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
