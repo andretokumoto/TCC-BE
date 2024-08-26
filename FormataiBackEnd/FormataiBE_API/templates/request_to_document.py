@@ -14,7 +14,8 @@ import subprocess
 import os
 
 def to_pdf():
-    tex_path = 'FormataiBE_API/templates'
+    
+    tex_path = os.path.abspath('FormataiBE_API/templates')
     tex_filename = 'arquivo_gerado.tex'
     pdf_filename = 'arquivo_gerado.pdf'
 
@@ -30,11 +31,11 @@ def to_pdf():
 def to_tex(dados):
 
     document_type = dados.get('document_type')
-    output_path = 'FormataiBE_API/templates/arquivo_gerado.tex'
+    output_path = os.path.abspath('FormataiBE_API/templates/arquivo_gerado.tex')
     
     if document_type == 'oficio':
 
-        template_path = 'FormataiBE_API/templates/oficio.tex'
+        template_path = os.path.abspath('FormataiBE_API/templates/oficio.tex')
         template = open_template(template_path)
         
         doc_gerado = template.replace('__OFICIO_NUMERO__', dados.get('oficio_numero', ''))
