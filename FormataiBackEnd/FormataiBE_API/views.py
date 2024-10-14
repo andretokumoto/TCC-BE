@@ -16,15 +16,15 @@ def getpdf(request):
     if request.method == 'POST':
         pdf_gerado = to_pdf()
 
-    if os.path.exists(pdf_gerado):
+        if os.path.exists(pdf_gerado):
 
-        arquivo = FileResponse(open(pdf_gerado, 'rb'), content_type='application/x-tex')
-        arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(pdf_gerado)}"'
+            arquivo = FileResponse(open(pdf_gerado, 'rb'), content_type='application/x-tex')
+            arquivo['Content-Disposition'] = f'attachment; filename="{os.path.basename(pdf_gerado)}"'
 
-        return arquivo
-        
-    else:
-            return Response({"error": "File not found"}, status=status.HTTP_404_NOT_FOUND)
+            return arquivo
+            
+        else:
+                return Response({"error": "File not found"}, status=status.HTTP_404_NOT_FOUND)
      
 @api_view(['POST'])
 def getLatex(request):
