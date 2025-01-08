@@ -19,6 +19,14 @@ def to_pdf(dados):
     """
     Gera o arquivo PDF usando o arquivo LaTeX criado.
     """
+    # Definir o caminho do diretório temporário
+    temp_dir = os.path.abspath('FormataiBE_API/templates/arquivos_temp')
+
+    # Verificar se o diretório existe, se não, cria-lo
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)
+
+    # Gerar o caminho do arquivo .tex
     tex_path = to_tex(dados)
     output_dir = os.path.dirname(tex_path)
     pdf_filename = os.path.basename(tex_path).replace('.tex', '.pdf')
@@ -34,6 +42,7 @@ def to_pdf(dados):
         raise FileNotFoundError("O arquivo PDF não foi gerado corretamente.")
 
     return pdf_path
+
 
 
 def to_tex(dados):
