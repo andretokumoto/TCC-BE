@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Requisição</title>
+</head>
+<body>
+
+    <button onclick="enviarRequisicao()">Gerar PDF</button>
+
+    <script>
+        function enviarRequisicao() {
+            const dados = {
+                document_type: 'oficio',
+                oficio_numero: '123',
+                destinatario: 'João Silva',
+                endereco_destinatario: 'Rua XYZ, 123',
+                cidadeEstado_destinatario: 'São Paulo, SP',
+                cep_destinatario: '01000-000',
+                corpo_mensagem: 'Solicito a gentileza de...',
+                assunto: 'Assunto do Ofício',
+                nome_remetente: 'Carlos Souza',
+                cargo_remetente: 'Diretor',
+                organizacao_remetente: 'Empresa ABC'
+            };
+
+            fetch('http://127.0.0.1:8000/api/get-pdf/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+                return response.blob(); // Aqui usamos 'blob' para lidar com arquivos binários
+            })
+            .then(blob => {
+                // Criar um link para download
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = 'arquivo_gerado.pdf'; // Nome do arquivo gerado
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches e logs do Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+
+# Arquivos temporários criados pelo editor de texto
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+# Diretórios de ambiente virtual
+venv/
+env/
+.venv/
+.env/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Diretórios do pdflatex e LaTeX (arquivos temporários e de cache)
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.pdf
+
+# Outras configurações locais
+local_settings.py
+.env
+*.env
+
+# Arquivos de compilação
+*.o
+*.so
+*.exe
+
+# Arquivos de backup do Git
+*.orig
+
+# Diretórios relacionados ao build de Python
+build/
+dist/
+*.egg-info/
+.eggs/
