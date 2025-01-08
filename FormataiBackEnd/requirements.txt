@@ -2,6 +2,5 @@ django
 djangorestframework
 djangorestframework-xml
 djoser
-pdflatex
 pylatex
 gunicorn
