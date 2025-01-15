@@ -1,13 +1,10 @@
 import subprocess
 import os
 import uuid
-import logging
 from django.conf import settings
 
-# Configuração de logs
-logger = logging.getLogger(__name__)
 
-BASE_DIR = settings.BASE_DIR
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def open_template(template_path):
@@ -24,13 +21,11 @@ def to_pdf(dados):
     """
     Gera o arquivo PDF usando o arquivo LaTeX criado.
     """
-    temp_dir = os.path.join(BASE_DIR, 'FormataiBE_API/templates/arquivos_temp')
+    temp_dir = os.path.abspath('FormataiBE_API/templates/arquivos_temp')
     if not os.path.exists(temp_dir):
         os.makedirs(temp_dir)
 
     tex_path = to_tex(dados)
-    logger.info(f"Arquivo .tex gerado em: {tex_path}")
-    
     output_dir = os.path.dirname(tex_path)
     pdf_filename = os.path.basename(tex_path).replace('.tex', '.pdf')
     pdf_path = os.path.join(output_dir, pdf_filename)
@@ -43,15 +38,16 @@ def to_pdf(dados):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-        logger.info(f"stdout: {result.stdout.decode()}")
-        logger.error(f"stderr: {result.stderr.decode()}")
+
+        # Log de saída de stdout e stderr para diagnóstico
+        print("stdout:", result.stdout.decode())
+        print("stderr:", result.stderr.decode())
 
     except subprocess.CalledProcessError as e:
-        logger.error(f"Erro ao gerar PDF: {str(e)}\n{e.stderr.decode()}")
-        raise RuntimeError(f"Erro ao gerar PDF: {str(e)}\n{e.stderr.decode()}")
+        # Exibe o erro detalhado
+        raise RuntimeError(f"Erro ao gerar PDF: {str(e)}\nstdout: {e.stdout.decode()}\nstderr: {e.stderr.decode()}")
 
     if not os.path.exists(pdf_path):
-        logger.error(f"Arquivo PDF não encontrado em: {pdf_path}")
         raise FileNotFoundError("O arquivo PDF não foi gerado corretamente.")
 
     return pdf_path
@@ -62,13 +58,13 @@ def to_tex(dados):
     Gera o arquivo LaTeX baseado nos dados fornecidos.
     """
     document_type = dados.get('document_type')
-    output_dir = os.path.join(BASE_DIR, 'FormataiBE_API/templates/arquivos_temp')
-    os.makedirs(output_dir, exist_ok=True)
+    temp_dir = os.path.join(BASE_DIR, 'arquivos_temp')
+    os.makedirs(temp_dir, exist_ok=True)
 
-    output_path = os.path.join(output_dir, f"{uuid.uuid4().hex}.tex")
+    output_path = os.path.join(temp_dir, f"{uuid.uuid4().hex}.tex")
 
     if document_type == 'oficio':
-        template_path = os.path.join(BASE_DIR, 'FormataiBE_API/templates/oficio.tex')
+        template_path = os.path.abspath('FormataiBE_API/templates/oficio.tex')
         template = open_template(template_path)
 
         doc_gerado = template.replace('__OFICIO_NUMERO__', dados.get('oficio_numero', ''))
@@ -85,7 +81,7 @@ def to_tex(dados):
         salva_arquivo(output_path, doc_gerado)
 
     elif document_type == 'memorando':
-        template_path = os.path.join(BASE_DIR, 'FormataiBE_API/templates/memorando.tex')
+        template_path = os.path.abspath('FormataiBE_API/templates/memorando.tex')
         template = open_template(template_path)
 
         doc_gerado = template.replace('__DESTINATARIO__', dados.get('destinatario', ''))
@@ -99,5 +95,9 @@ def to_tex(dados):
 
     else:
         raise ValueError("Tipo de documento inválido ou não suportado.")
+
+    # Log para verificar o conteúdo do arquivo .tex
+    print(f"Arquivo .tex gerado: {output_path}")
+    print("Conteúdo do arquivo .tex gerado:\n", open(output_path, 'r').read())
 
     return output_path
