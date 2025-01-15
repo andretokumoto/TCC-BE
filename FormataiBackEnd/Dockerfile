@@ -9,19 +9,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-xetex \
     && rm -rf /var/lib/apt/lists/*
 
-# Define o diretório de trabalho
+## Copie o requirements.txt
+COPY requirements.txt /app/requirements.txt
+
 WORKDIR /app
 
-# Copia os arquivos do projeto
-COPY . /app
-
-# Instala as dependências do Python
+# Instale as dependências usando o pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exponha a porta que o Render espera
 EXPOSE 8000
 
-# Comando de inicialização
-# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "FormataiBackEnd.wsgi:application"]
-CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:$PORT"]
+# Copie o restante do seu código para o contêiner
+COPY . /app/
 
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "FormataiBackEnd.wsgi:application"]
