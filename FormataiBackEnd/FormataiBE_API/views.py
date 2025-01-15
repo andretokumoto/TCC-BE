@@ -4,7 +4,7 @@ import os
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from .templates.request_to_document import to_pdf, to_tex
+from request_to_document import to_pdf, to_tex
 
 @csrf_exempt
 @api_view(['POST'])
