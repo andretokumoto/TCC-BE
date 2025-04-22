@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerar Documento</title>
+</head>
+<body>
+  <h1>Gerador de Documentos</h1>
+
+  <form id="documentForm">
+    <label>Tipo de Documento:</label>
+    <select name="document_type" required>
+      <option value="oficio">Ofício</option>
+      <option value="memorando">Memorando</option>
+    </select><br><br>
+
+    <label>Destinatário:</label>
+    <input type="text" name="destinatario"><br><br>
+
+    <label>Endereço do Destinatário:</label>
+    <input type="text" name="endereco_destinatario"><br><br>
+
+    <label>Cidade/Estado:</label>
+    <input type="text" name="cidadeEstado_destinatario"><br><br>
+
+    <label>CEP:</label>
+    <input type="text" name="cep_destinatario"><br><br>
+
+    <label>Assunto:</label>
+    <input type="text" name="assunto"><br><br>
+
+    <label>Corpo da Mensagem:</label><br>
+    <textarea name="corpo_mensagem" rows="5" cols="50"></textarea><br><br>
+
+    <label>Nome do Remetente:</label>
+    <input type="text" name="nome_remetente"><br><br>
+
+    <label>Cargo do Remetente:</label>
+    <input type="text" name="cargo_remetente"><br><br>
+
+    <label>Organização do Remetente:</label>
+    <input type="text" name="organizacao_remetente"><br><br>
+
+    <label>Número do Ofício:</label>
+    <input type="text" name="oficio_numero"><br><br>
+
+    <button type="button" onclick="enviarFormulario('https://api-backend-hddt.onrender.com/api/get-pdf/')">Gerar PDF</button>
+    <button type="button" onclick="enviarFormulario('https://api-backend-hddt.onrender.com/api/get-latex/')">Gerar LaTeX</button>
+  </form>
+
+  <script>
+    function enviarFormulario(url) {
+      const form = document.getElementById('documentForm');
+      const formData = new FormData(form);
+      const jsonData = {};
+
+      formData.forEach((value, key) => {
+        jsonData[key] = value;
+      });
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao processar requisição.');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+
+        // Nome do arquivo pelo header ou por padrão
+        const contentDisposition = response.headers.get('Content-Disposition');
+        const filenameMatch = contentDisposition && contentDisposition.match(/filename="(.+)"/);
+        const filename = filenameMatch ? filenameMatch[1] : 'arquivo';
+
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+      })
+      .catch(error => {
+        alert('Erro: ' + error.message);
+      });
+    }
+  </script>
+</body>
+</html>
